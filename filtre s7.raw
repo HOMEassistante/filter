@@ -1,6 +1,5 @@
 ## Blacklisted Entries! ##
 
-youtubei.googleapis.com
 notifications-pa.googleapis.com
 mobile-gtalk.l.google.com
 mtalk.google.com
@@ -30,3 +29,5 @@ www.gstatic.com
 
 
 ## Whitelisted Entries! ##
+
+!youtubei.googleapis.com
