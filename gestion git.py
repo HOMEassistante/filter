@@ -46,6 +46,7 @@ def push_changes(branch="main"):
         print(f"Les changements ont été poussés vers la branche {branch}.")
     except Exception as e:
         print(f"Erreur lors du push des changements : {e}")
+        print("Assurez-vous que vous êtes connecté à GitHub et que la branche existe.")
 
 if __name__ == "__main__":
     # Spécifiez le répertoire à mettre à jour
