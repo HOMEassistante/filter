@@ -1,13 +1,16 @@
-## Blacklisted Entries! ##
+﻿## Blacklisted Entries! ##
 
 0.datadog.pool.ntp.org
 1.datadog.pool.ntp.org
 2.datadog.pool.ntp.org
 3.datadog.pool.ntp.org
 BCMLS2.glpals.com
+a1-eu.lifeaiot.com
+ac88393aca5853df7.dualstack.awsglobalaccelerator.com
 accounts.spotify.com
 ae-abtest-server-gab.aliexpress.com
 ae.iads.unity3d.com
+aeproductsourcesite.alicdn.com
 alt1-mtalk.google.com
 alt1.mobile-gtalk.l.google.com
 alt2-mtalk.google.com
@@ -23,6 +26,7 @@ alt7.mobile-gtalk.l.google.com
 alt8-mtalk.google.com
 alt8.mobile-gtalk4.l.google.com
 ams2.a.ak.prd.aadg.akadns.net
+analytics.clubic.com
 android-context-data.googleapis.com
 android.apis.google.com
 api.helpshift.com
@@ -31,17 +35,23 @@ api.spotify.com
 arup.m.lazada.com
 asset.samsungvisioncloud.com
 capi.samsungcloud.com
+clubic-discourse.s3.dualstack.eu-west-3.amazonaws.com
 connectivitycheck.gstatic.com
+d129qj39ell9t0.cloudfront.net
 d17ndjuagurpsr.cloudfront.net
 d19tvvpg56437g.cloudfront.net
 d1gtt36mgrexoi.cloudfront.net
 d1vfo6973xsx4h.cloudfront.net
 d2f18rgqnlt5oj.cloudfront.net
 d2gxp5gk2oyhzt.cloudfront.net
+d2h2yqnfpu4gl5.cdn5th.com
+d2iih6ll7e7icz.cloudfront.net
 d3uiyspfza2s6n.cloudfront.net
+d46e0u663bkjg.cloudfront.net
 dc-gcp.di.atlas.samsung.com
 dc.di.atlas.samsung.com
 dc.dqa.samsung.com
+dcf4su6rkrsla.cloudfront.net
 ddf.di.atlas.samsung.com
 deviceintegritytokens-pa.googleapis.com
 diagmon-serviceapi.samsungdm.com
@@ -51,6 +61,7 @@ dls-gcp.di.atlas.samsung.com
 dls-udc.dqa.samsung.com
 dls.di.atlas.samsung.com
 dns.google
+dualstack.o.sni.global.fastly.net
 e13829.x.akamaiedge.net
 ec2-18-197-145-197.eu-central-1.compute.amazonaws.com
 edge-web.dual-gslb.spotify.com
@@ -58,6 +69,7 @@ encrypted-tbn0.gstatic.com
 eu-api.samsungpositioning.com
 eu-dir-apis.samsungdiroute.net
 external-content.duckduckgo.com
+extranet-ipv4-pub-azams.alb.xiaomi.com
 fe-pew1-ext-openapi-lb-547958838.eu-west-1.elb.amazonaws.com
 firebaseinstallations.googleapis.com
 firebaselogging-pa.googleapis.com
@@ -79,10 +91,13 @@ infinitedata-pa.googleapis.com
 jm-msg-global.aliexpress.com
 k8s-sp-newapisp-e55b61cdf9-450098043.eu-west-1.elb.amazonaws.com
 login.microsoftonline.com
+m1-eu.lifeaiot.com
 mem.gfx.ms
+ml-cluster01-lb01.milibris.net
 msgaccs-de.aserver-ae.aliexpress.com.gds.alibabadns.com
 mtalk.google.com
 notifications-pa.googleapis.com
+npaw1.rtl.fr
 o-adq.mediation.unity3d.com
 o-iab.mediation.unity3d.com
 o-sdk.mediation.unity3d.com
@@ -90,6 +105,7 @@ o2129.ingest.sentry.io
 o315582.ingest.sentry.io
 ops-eks-prod-external-d46c0b1a858840cf.elb.us-east-1.amazonaws.com
 p5e-l-p5elb-1ofjghoyvliny-1917bc3b281eae47.elb.us-east-1.amazonaws.com
+phonedeviceverification-pa.googleapis.com
 platform.twitter.com
 play.samsungcloud.com
 policy.samsungcloud.com
@@ -97,33 +113,61 @@ poll.gras.samsungdm.com
 qcloud-pr-backend-1686842010.cn-north-1.elb.amazonaws.com.cn
 qcloud-pr-backend-390510218.us-east-1.elb.amazonaws.com
 rg-sg.lazada.wagbridge.aserver-lazada.alibaba.com.gds.alibabadns.com
+rr11---sn-n4g-jqbe6.googlevideo.com
+rr11.sn-n4g-jqbe6.googlevideo.com
+rr5---sn-n4g-cvq6.googlevideo.com
+rr5.sn-n4g-cvq6.googlevideo.com
 s-part-0014.t-0009.t-msedge.net
 s3-w.us-east-1.amazonaws.com
+s3.dualstack.eu-west-3.amazonaws.com
 safebrowsing.googleapis.com
 scloud-p2uw2-ext.elb.samsungcloud.com
 sdk.pushmessage.samsung.com
 sg-static-file.slatic.net.jshsosa.ksyunv5.com
 star-mini.c10r.facebook.com
 star.c10r.facebook.com
+static.rtl.fr
+static.vecteezy.com
+static.xooloo-messenger.com
 static.xx.fbcdn.net
+static1.dmcdn.net
 staticcdn.duckduckgo.com
+statics.liberation.fr
 stun.xooloo-messenger.com
 us-click.aliexpress.com
 vas.samsungapps.com
+video.aliexpress-media.com
 voilatile-pa.googleapis.com
 w.isx.unity3d.com
 www.facebook.com
 www.gstatic.com
 www.tm.ak.prd.aadg.trafficmanager.net
 www.tm.v4.a.prd.aadg.akadns.net
+y8obqk-cdn-settings.appsflyersdk.com
 y8obqk-launches.appsflyersdk.com
+youtube-ui.l.google.com
 yt3.ggpht.com
+zconfig.alibabausercontent.com
+zconfig.alibabausercontent.com.w.cdngslb.com
+﻿
 
 
 ## Whitelisted Entries! ##
 
+!ae-pic-a1.aliexpress-media.com
 !assets.alicdn.com
+!e118788.dscb.akamaiedge.net
 !e11956.x.akamaiedge.net
+!e1429.x.akamaiedge.net
+!entitlements.jwplayer.com
 !eu.aserver-ae.aliexpress.com.gds.alibabadns.com
 !i.ytimg.com
+!rr2---sn-25ge7nzk.gvt1.com
+!rr2.sn-25ge7nzk.gvt1.com
+!rr4---sn-25ge7nzs.gvt1.com
+!rr4.sn-25ge7nzs.gvt1.com
+!rr5---sn-25glenlz.gvt1.com
+!rr5.sn-25glenlz.gvt1.com
+!ssl.p.jwpcdn.com
 !youtubei.googleapis.com
+dualstack.n.sni.global.fastly.net
