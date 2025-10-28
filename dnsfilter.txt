@@ -1,0 +1,36 @@
+doh 9.9.9.9
+https://dns.quad9.net/dns-query
+
+doh 149.112.112.112
+https://dns.quad9.net/dns-query
+
+dot 9.9.9.9
+
+dot 149.112.112.112
+
+udp 192.168.1.226
+
+udp 9.9.9.9
+
+
+
+https://raw.githubusercontent.com/HOMEassistante/filter/main/filtre%20s10%2B.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/filtre%20s7.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/ads1.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/ads2.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/porn0.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/porn1.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/porn2.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/porn3.raw
+https://raw.githubusercontent.com/HOMEassistante/filter/main/porn4.raw
+
+https://github.com/HOMEassistante/filter/blob/main/Pihole/filtre%20s10%2B.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/filtre%20s7.txt
+
+https://github.com/HOMEassistante/filter/blob/main/Pihole/ads1.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/ads2.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/porn0.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/porn1.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/porn2.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/porn3.txt
+https://github.com/HOMEassistante/filter/blob/main/Pihole/porn4.txt
