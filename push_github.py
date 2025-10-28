@@ -48,3 +48,5 @@ else:
 
     except Exception as e:
         print(f"❌ Erreur : {e}")
+
+input("\nAppuie sur Entrée pour fermer...")
