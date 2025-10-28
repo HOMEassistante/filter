@@ -95,14 +95,18 @@ if secret_files:
         print_colored("❌ Erreur lors de la suppression des fichiers secrets.", "31")
         print(str(e))
 
-# ==== 7️⃣ Ajout dans .gitignore ====
+# ==== 7️⃣ Ajout dans .gitignore (local seulement) ====
 if secret_files:
     gitignore_path = ".gitignore"
+
+    # Écriture ou mise à jour du .gitignore
     with open(gitignore_path, "a", encoding="utf-8") as f:
         for file in secret_files:
             f.write(f"{file}\n")
-    run_git_command(["add", ".gitignore"])
-    run_git_command(["commit", "-m", "Ajout de .gitignore pour ignorer les fichiers secrets"], exit_on_error=False)
+
+    # Empêche .gitignore d’être suivi par Git
+    run_git_command(["rm", "--cached", ".gitignore"], exit_on_error=False)
+    print_colored("📄 .gitignore mis à jour localement (non suivi sur GitHub).", "33")
 
 # ==== 8️⃣ Commit du reste ====
 run_git_command(["add", "."], exit_on_error=False)
