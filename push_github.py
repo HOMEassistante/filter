@@ -4,7 +4,7 @@ import os
 import re
 
 # ==== Fonctions utilitaires ====
-def run_git_command(cmd, capture_output=True):
+def run_git_command(cmd, capture_output=True, exit_on_error=False):
     """Exécute une commande Git et retourne sa sortie."""
     try:
         result = subprocess.run(
@@ -15,42 +15,58 @@ def run_git_command(cmd, capture_output=True):
         )
         return result.stdout
     except subprocess.CalledProcessError as e:
-        print(f"Erreur lors de l'exécution de la commande: git {' '.join(cmd)}")
+        print(f"\n❌ Erreur lors de la commande: git {' '.join(cmd)}")
         if e.stderr:
-            print(e.stderr)
-        sys.exit(1)
+            print(e.stderr.strip())
+        if exit_on_error:
+            sys.exit(1)
+        return ""  # continue au lieu de quitter
 
 def print_colored(text, color_code):
     """Affiche du texte coloré dans la console."""
     print(f"\033[{color_code}m{text}\033[0m")
 
-# ==== 1️⃣ Affiche le statut du dépôt ====
+def safe_input(msg):
+    """Empêche la fermeture immédiate de la fenêtre."""
+    try:
+        input(msg)
+    except EOFError:
+        pass
+
+# ==== Début du script ====
+print_colored("\n=== Analyse du dépôt Git ===", "1;34")
+
+# Vérifie que c’est bien un dépôt Git
+if not os.path.exists(".git"):
+    print_colored("⚠️  Ce dossier n'est pas un dépôt Git !", "31")
+    safe_input("\nAppuie sur Entrée pour fermer la fenêtre...")
+    sys.exit(0)
+
+# ==== 1️⃣ Statut du dépôt ====
 print_colored("\n=== Statut du dépôt ===", "1;34")
 print(run_git_command(["status"]))
 
-# ==== 2️⃣ Affiche les 10 derniers commits ====
+# ==== 2️⃣ Derniers commits ====
 print_colored("\n=== 10 derniers commits ===", "1;34")
 print(run_git_command(["log", "--oneline", "-10"]))
 
-# ==== 3️⃣ Affiche les fichiers modifiés ====
-print_colored("\n=== Différences et fichiers modifiés ===", "1;34")
+# ==== 3️⃣ Fichiers modifiés ====
+print_colored("\n=== Fichiers modifiés ===", "1;34")
 print(run_git_command(["diff", "--stat"]))
 
-# ==== 4️⃣ Affiche les fichiers ajoutés ou supprimés ====
+# ==== 4️⃣ Fichiers ajoutés ou supprimés ====
 print_colored("\n=== Fichiers ajoutés ou supprimés ===", "1;34")
 diff_name_status = run_git_command(["diff", "--name-status"])
 for line in diff_name_status.splitlines():
     if line.startswith("A"):
-        print_colored(line, "32")  # vert
+        print_colored(line, "32")
     elif line.startswith("D"):
-        print_colored(line, "31")  # rouge
+        print_colored(line, "31")
     else:
-        print(line)  # modifié ou autre
+        print(line)
 
 # ==== 5️⃣ Détection automatique des fichiers secrets ====
 print_colored("\n=== Détection automatique des fichiers secrets ===", "1;34")
-
-# Fichiers sensibles typiques
 secret_patterns = [r".*\.env", r".*token.*\.txt", r".*\.pem", r".*\.key"]
 all_files = run_git_command(["ls-files"]).splitlines()
 
@@ -61,49 +77,49 @@ for f in all_files:
             secret_files.append(f)
 
 if secret_files:
-    print_colored(f"Fichiers secrets détectés : {', '.join(secret_files)}", "31")
+    print_colored(f"🚨 Fichiers secrets détectés : {', '.join(secret_files)}", "31")
 else:
-    print_colored("Aucun fichier secret détecté automatiquement.", "33")  # jaune
+    print_colored("✅ Aucun fichier secret détecté.", "32")
 
-# ==== 6️⃣ Supprimer les fichiers secrets de l'historique ====
+# ==== 6️⃣ Suppression des fichiers secrets ====
 if secret_files:
+    print_colored("\nSuppression de l’historique des fichiers secrets...", "33")
+    args = [sys.executable, "-m", "git_filter_repo", "--force"]
+    for f in secret_files:
+        args += ["--path", f, "--invert-paths"]
+
     try:
-        args = [sys.executable, "-m", "git_filter_repo", "--force"]
-        for f in secret_files:
-            args += [f"--path", f, "--invert-paths"]
         subprocess.run(args, check=True)
-        print_colored("Fichiers secrets supprimés de l'historique.", "32")
+        print_colored("✅ Fichiers secrets supprimés de l’historique.", "32")
     except subprocess.CalledProcessError as e:
-        print("Erreur lors de la suppression des fichiers secrets :", e)
-        sys.exit(1)
+        print_colored("❌ Erreur lors de la suppression des fichiers secrets.", "31")
+        print(str(e))
 
-# ==== 7️⃣ Créer/mettre à jour .gitignore pour ignorer les fichiers secrets ====
-gitignore_path = ".gitignore"
-with open(gitignore_path, "a") as f:
-    for file in secret_files:
-        f.write(f"{file}\n")
+# ==== 7️⃣ Ajout dans .gitignore ====
+if secret_files:
+    gitignore_path = ".gitignore"
+    with open(gitignore_path, "a", encoding="utf-8") as f:
+        for file in secret_files:
+            f.write(f"{file}\n")
+    run_git_command(["add", ".gitignore"])
+    run_git_command(["commit", "-m", "Ajout de .gitignore pour ignorer les fichiers secrets"], exit_on_error=False)
 
-run_git_command(["add", ".gitignore"])
-run_git_command(["commit", "-m", "Ajout de .gitignore pour ignorer les fichiers secrets"])
+# ==== 8️⃣ Commit du reste ====
+run_git_command(["add", "."], exit_on_error=False)
+output = run_git_command(["commit", "-m", "Nettoyage des fichiers secrets"], exit_on_error=False)
+if not output.strip():
+    print_colored("⚠️ Aucun changement à committer.", "33")
 
-# ==== 8️⃣ Commit tous les changements restants ====
-run_git_command(["add", "."])
-try:
-    run_git_command(["commit", "-m", "Nettoyage des fichiers secrets"])
-except SystemExit:
-    print_colored("Aucun changement à committer.", "33")
-
-# ==== 9️⃣ Push sur GitHub avec force ====
+# ==== 9️⃣ Push GitHub ====
 print_colored("\n=== Push vers GitHub ===", "1;34")
-try:
-    run_git_command(["push", "origin", "main", "--force"])
-    print_colored("Push terminé avec succès.", "32")
-except SystemExit:
-    print_colored("Erreur lors du push. Vérifie ton dépôt distant.", "31")
+output = run_git_command(["push", "origin", "main", "--force"], exit_on_error=False)
+if "rejected" in output or "error" in output.lower():
+    print_colored("⚠️ Push refusé. Vérifie les règles du dépôt distant.", "31")
+else:
+    print_colored("✅ Push terminé avec succès.", "32")
 
-# ==== 🔟 Afficher le statut final ====
+# ==== 🔟 Statut final ====
 print_colored("\n=== Statut final du dépôt ===", "1;34")
 print(run_git_command(["status"]))
 
-# ==== 1️⃣1️⃣ Laisser la fenêtre ouverte ====
-input("\nAppuie sur Entrée pour fermer la fenêtre...")
+safe_input("\nAppuie sur Entrée pour fermer la fenêtre...")
