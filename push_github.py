@@ -1,43 +1,50 @@
-import os
 import subprocess
-from dotenv import load_dotenv
+import datetime
 
-# === Charger les variables du fichier .env ===
-load_dotenv()
-github_token = os.getenv("GITHUB_TOKEN")
-
-# === Configuration ===
+# Chemin vers le dépôt
 repo_path = r"C:\Depot git"
-commit_message = "Mise à jour automatique"
-remote_url = "https://github.com/HOMEassistante/filter.git"
-branch_name = "main"  # ou "master" selon ton dépôt
 
-def push_to_github():
-    if not github_token:
-        print("❌ Erreur : le token GitHub n'est pas défini dans le fichier .env")
-        return
+# Message de commit avec date et heure
+commit_message = f"Mise à jour automatique {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
-    os.chdir(repo_path)
+def run_git_command(command):
+    """Exécute une commande git dans le dépôt et renvoie le code de retour et la sortie."""
+    result = subprocess.run(
+        command,
+        cwd=repo_path,
+        text=True,
+        capture_output=True,
+        shell=True
+    )
+    return result.returncode, result.stdout.strip(), result.stderr.strip()
 
-    print("🔄 Configuration du dépôt distant...")
-    subprocess.run(["git", "init"], check=False)
-    subprocess.run(["git", "remote", "remove", "origin"], check=False)
-    subprocess.run([
-        "git", "remote", "add", "origin",
-        f"https://{github_token}@github.com/HOMEassistante/filter.git"
-    ], check=True)
+# Vérifie si le dépôt a des changements à committer
+code, stdout, stderr = run_git_command(["git", "status", "--porcelain"])
 
-    print("📁 Ajout des fichiers...")
-    subprocess.run(["git", "add", "."], check=True)
+if code != 0:
+    print(f"Erreur Git : {stderr}")
+    exit(1)
 
-    print("💬 Création du commit...")
-    subprocess.run(["git", "commit", "-m", commit_message], check=False)
+if stdout == "":
+    print("✅ Aucun changement à committer.")
+else:
+    try:
+        # Ajouter tous les fichiers suivis
+        code, out, err = run_git_command(["git", "add", "."])
+        if code != 0:
+            raise Exception(err)
 
-    print("🚀 Envoi vers GitHub...")
-    subprocess.run(["git", "branch", "-M", branch_name], check=False)
-    subprocess.run(["git", "push", "-u", "origin", branch_name, "--force"], check=True)
+        # Créer le commit
+        code, out, err = run_git_command(["git", "commit", "-m", commit_message])
+        if code != 0:
+            raise Exception(err)
+        print(f"✅ Commit créé : {commit_message}")
 
-    print("✅ Dépôt mis à jour avec succès !")
+        # Pousser sur GitHub
+        code, out, err = run_git_command(["git", "push", "origin", "main"])
+        if code != 0:
+            raise Exception(err)
+        print("✅ Dépôt mis à jour sur GitHub avec succès !")
 
-if __name__ == "__main__":
-    push_to_github()
+    except Exception as e:
+        print(f"❌ Erreur : {e}")
