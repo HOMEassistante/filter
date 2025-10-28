@@ -128,20 +128,4 @@ print(run_git_command(["status"]))
 
 
 
-# ==== 1️⃣2️⃣ Suppression de .gitignore du dépôt en ligne ====
-if os.path.exists(".gitignore"):
-    print_colored("\n=== Suppression de .gitignore du dépôt distant ===", "1;34")
-    run_git_command(["rm", "--cached", ".gitignore"], exit_on_error=False)
-    run_git_command(["commit", "-m", "Retrait de .gitignore du dépôt"], exit_on_error=False)
-    output = run_git_command(["push", "origin", "main", "--force"], exit_on_error=False)
-
-    if "rejected" in output or "error" in output.lower():
-        print_colored("⚠️ Erreur lors du retrait de .gitignore en ligne.", "31")
-    else:
-        print_colored("✅ .gitignore retiré du dépôt GitHub avec succès.", "32")
-else:
-    print_colored("ℹ️ Aucun fichier .gitignore à retirer.", "33")
-
-
-
 safe_input("\nAppuie sur Entrée pour fermer la fenêtre...")
