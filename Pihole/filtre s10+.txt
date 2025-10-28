@@ -1,5 +1,4 @@
-﻿## Blacklisted Entries! ##
-
+﻿
 0.datadog.pool.ntp.org
 1.datadog.pool.ntp.org
 2.datadog.pool.ntp.org
@@ -113,10 +112,6 @@ poll.gras.samsungdm.com
 qcloud-pr-backend-1686842010.cn-north-1.elb.amazonaws.com.cn
 qcloud-pr-backend-390510218.us-east-1.elb.amazonaws.com
 rg-sg.lazada.wagbridge.aserver-lazada.alibaba.com.gds.alibabadns.com
-rr11---sn-n4g-jqbe6.googlevideo.com
-rr11.sn-n4g-jqbe6.googlevideo.com
-rr5---sn-n4g-cvq6.googlevideo.com
-rr5.sn-n4g-cvq6.googlevideo.com
 s-part-0014.t-0009.t-msedge.net
 s3-w.us-east-1.amazonaws.com
 s3.dualstack.eu-west-3.amazonaws.com
@@ -151,13 +146,4 @@ zconfig.alibabausercontent.com
 zconfig.alibabausercontent.com.w.cdngslb.com
 ﻿
 
-
-## Whitelisted Entries! ##
-
-!ae-pic-a1.aliexpress-media.com
-!assets.alicdn.com
-!entitlements.jwplayer.com
-!eu.aserver-ae.aliexpress.com.gds.alibabadns.com
-!i.ytimg.com
-!youtubei.googleapis.com
 

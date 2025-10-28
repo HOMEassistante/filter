@@ -1,0 +1,4 @@
+!assets.alicdn.com
+!eu.aserver-ae.aliexpress.com.gds.alibabadns.com
+!i.ytimg.com
+!youtubei.googleapis.com
