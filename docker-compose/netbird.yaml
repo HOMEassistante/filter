@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  netbird:
+    image: netbirdio/netbird:latest
+    container_name: netbird
+    restart: unless-stopped
+    privileged: true
+
+    cap_add:
+      - SYS_ADMIN
+      - NET_ADMIN
+    environment:
+      # Remplacez les valeurs ci-dessous avec vos informations
+      NETBIRD_MANAGEMENT_API: "https://api.wiretrustee.com"  # URL de l'API de gestion
+      NETBIRD_SETUP_KEY: "30077DCD-3C1B-4987-929E-005CE7F98D10"  # Ajoutez votre clé d'installation ici
+    network_mode: "host"  # Requis pour que NetBird fonctionne correctement
+    volumes:
+      - /home/pi/docker/netbird:/etc/netbird  # Pour stocker les fichiers de configuration localement
+    user: root
+    

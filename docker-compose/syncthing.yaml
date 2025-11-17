@@ -1,0 +1,13 @@
+version: '3'
+services:
+  syncthing:
+    image: syncthing/syncthing:latest
+    container_name: syncthing
+    ports:
+      - "8384:8384" # Port pour l'interface Web
+      - "22000:22000" # Port pour les connexions Syncthing
+      - "21027:21027/udp" # Port pour la découverte locale
+    volumes:
+      - /home/pi/docker/syncthing/config:/var/syncthing/config
+      - /home/pi/docker/syncthing/data:/var/syncthing/data
+    restart: unless-stopped

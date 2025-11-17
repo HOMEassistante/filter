@@ -1,0 +1,18 @@
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 4000:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - grafana-conf:/etc/grafana
+    restart: unless-stopped
+    
+volumes:
+  grafana-data:
+  grafana-conf:
+
+  
+    labels:
+      - diun.enable=true

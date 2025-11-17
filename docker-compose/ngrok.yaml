@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    network_mode: host # Équivaut à --net=host
+    environment:
+      - NGROK_AUTHTOKEN=2rNP50sFhzi2RNbP4L2qOI7QxoN_3aZZF8h4ueEb2uLXrSUKo
+      - NGROK_REGION=eu # ou autre région : us, ap, au, sa, jp, in
+      - NGROK_TUNNELS=1 # Nombre de tunnels autorisés 
+    ports:
+      - 4040:4040 # Port pour accéder au dashboard de Ngrok
+    command: http 8123 # Exemple : 80 ou 8080 selon votre application

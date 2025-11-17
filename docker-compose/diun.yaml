@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+  diun:
+    image: crazymax/diun:latest
+    command: serve
+    volumes:
+      - /home/pi/docker/diun/data:/data
+      - /home/pi/docker/diun/diun.yml:/diun.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/Paris
+      - LOG_LEVEL=info
+      - LOG_JSON=false
+      - DIUN_WATCH_WORKERS=20
+      - DIUN_WATCH_SCHEDULE=0 19,23 * * *
+      - DIUN_PROVIDERS_DOCKER=true
+    restart: unless-stopped
+    
+    labels:
+      - diun.enable=true
+      - diun.watch_repo=true

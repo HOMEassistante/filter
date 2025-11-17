@@ -1,0 +1,19 @@
+#version: "3"
+
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    volumes:
+    - /home:/srv
+    - /home/pi/docker/filebrowser/data:/data
+    - /home/pi/docker/filebrowser/config:/config
+    ports:
+      - 8085:80    
+    restart: unless-stopped
+
+    labels:
+      - diun.enable=true
+
+
+    

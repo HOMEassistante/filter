@@ -1,0 +1,18 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    network_mode: "host"
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 784:784/udp
+      - 853:853/tcp
+      - 3000:3000/tcp
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - /home/pi/docker/adguardhome/work:/adguardhome/work
+      - /home/pi/docker/adguardhome/conf:/adguardhome/conf
+    restart: unless-stopped
+

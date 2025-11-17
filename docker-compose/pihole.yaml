@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  pihole:
+    container_name: pi-hole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+    environment:
+      TZ: "Europe/Paris" # Remplacez par votre zone horaire
+      WEBPASSWORD: 11121972 # Remplacez par votre mot de passe pour l'interface Web
+      SERVERIP: 192.168.1.1 \
+    volumes:
+      - "/home/pi/docker/pi-hole/etc-pihole/:/etc/pihole/"
+      - "/home/pi/docker/pi-hole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+    restart: unless-stopped

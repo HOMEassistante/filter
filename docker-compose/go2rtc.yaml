@@ -1,0 +1,12 @@
+services:
+  go2rtc:
+    image: alexxit/go2rtc:latest
+    network_mode: host       # important for WebRTC, HomeKit, UDP cameras
+    privileged: true         # only for FFmpeg hardware transcoding
+    restart: unless-stopped  # autorestart on fail or config change from WebUI
+    ports:
+      - 1984:1984
+    environment:
+      - TZ=Europe/Paris  # timezone in logs
+    volumes:
+      - "/home/pi/docker/go2rtc:/config"   # folder for go2rtc.yaml file (edit from WebUI)

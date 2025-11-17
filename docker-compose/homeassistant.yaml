@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  homeassistant:
+    image: homeassistant/home-assistant:latest
+    container_name: home-assistant
+    network_mode: "host"
+    environment:
+      - TZ=Europe/Paris
+    ports:
+      - 8123:8123
+    volumes:
+      - /home/pi/docker/home-assistant/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    devices:
+#      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/ttyUSB1:/dev/ttyUSB1
+    restart: unless-stopped
+
+volumes:
+  config:
+
+    labels:
+      - diun.enable=true  

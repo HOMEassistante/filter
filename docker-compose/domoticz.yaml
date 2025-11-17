@@ -1,0 +1,19 @@
+services:
+  domoticz:
+    container_name: domoticz
+    image: domoticz/domoticz:latest
+#    image: linuxserver/domoticz:latest
+    ports:
+      - "8080:8080/tcp"
+#      - "6144:6144/tcp"
+#      - "1443:1443/tcp"
+#      - "9440:9440/tcp"
+    volumes:
+      - "/home/pi/docker/domoticz:/config"
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/ttyUSB1:/dev/ttyUSB1
+    restart: unless-stopped
+
+    labels:
+      - diun.enable=true

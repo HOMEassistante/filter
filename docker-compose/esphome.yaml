@@ -1,0 +1,18 @@
+version: '3'
+services:
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome
+    volumes:
+      - /home/pi/docker/esphome/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+    - 6052:6052
+#    - 6123:6123      
+    privileged: true
+    network_mode: host
+    environment:
+#      - USERNAME=admin
+#      - PASSWORD=Tom&Emma13-15
+      - ESPHOME_DASHBOARD_USE_PING=true
+    restart: unless-stopped

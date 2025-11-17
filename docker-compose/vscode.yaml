@@ -1,0 +1,12 @@
+version: "3"
+services:
+  vscode:
+    image: codercom/code-server:latest
+    container_name: vscode
+    ports:
+      - "8880:8080"
+    volumes:
+      - /home/pi/docker/vscode/project:/home/coder/project
+    environment:
+      - PASSWORD=11121972
+    restart: always

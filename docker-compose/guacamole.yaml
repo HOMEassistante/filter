@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  guacamole:
+    image:   jwetzell/guacamole:latest
+    container_name: guacamole
+#    environment:
+#      - GUACAMOLE_HOME=/guac-home
+    ports:
+      - "8888:8080"
+    volumes:
+      - /home/pi/docker/guacamole/config:/config #guac-home
+    restart: always
+
+volumes:
+  config:
+    driver: local
